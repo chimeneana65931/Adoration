@@ -1,0 +1,44 @@
+<div class="fullscreen" #container>
+
+  <!-- IMAGE PRINCIPALE -->
+  <img
+    class="image-principale"
+    src="assets/icon/sacrements.jpg"
+    alt="Image principale"
+    (click)="toggleMusique()">
+
+  <!-- ÉTINCELLES -->
+  <div class="sparkles">
+
+    <span class="sparkle sparkle-1">✦</span>
+    <span class="sparkle sparkle-2">✧</span>
+    <span class="sparkle sparkle-3">✦</span>
+    <span class="sparkle sparkle-4">✧</span>
+    <span class="sparkle sparkle-5">✦</span>
+    <span class="sparkle sparkle-6">✧</span>
+    <span class="sparkle sparkle-7">✦</span>
+    <span class="sparkle sparkle-8">✧</span>
+    <span class="sparkle sparkle-9">✦</span>
+    <span class="sparkle sparkle-10">✧</span>
+    <span class="sparkle sparkle-11">✦</span>
+    <span class="sparkle sparkle-12">✧</span>
+
+  </div>
+
+  <!-- MUSIQUE -->
+  <audio
+    #audioPlayer
+    src="assets/audio/sacramentus.mp3"
+    preload="auto"
+    loop>
+  </audio>
+
+  <!-- BOUTON FERMER -->
+  <button
+    class="btn-sortir"
+    (click)="sortir($event)">
+    ✕
+  </button>
+
+</div>
+
