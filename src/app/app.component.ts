@@ -1,152 +1,77 @@
-import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core'; // Importe les fonctionnalités nécessaires
 
-@Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrl: 'app.component.scss',
+@Component({ // Configure le composant
+  selector: 'app-root', // Définit le sélecteur du composant
+  templateUrl: 'app.component.html', // Définit le fichier HTML
+  styleUrl: 'app.component.scss', // Définit le fichier SCSS
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit { // Définit le composant principal
 
-  // Récupère le conteneur principal
-  @ViewChild('container') containerRef!: ElementRef;
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>; // Récupère le lecteur audio
 
-  // Récupère le lecteur audio
-  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+  musiqueEnLecture = false; // Indique si la musique joue
 
-  // Indique si la musique est en cours de lecture
-  musiqueEnLecture = false;
+  ngAfterViewInit(): void { // S'exécute après le chargement de la vue
 
-  // Indique si le navigateur a déjà tenté l'autoplay
-  private autoplayTeste = false;
+    const audio = this.audioPlayer.nativeElement; // Récupère le lecteur audio
 
-  // Lance automatiquement la musique après le chargement
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.lancerAutomatiquement();
-    }, 300);
-  }
+    audio.loop = true; // Active la lecture en boucle
 
-  // Essaie de lancer automatiquement la musique
-  private lancerAutomatiquement(): void {
-    const audio = this.audioPlayer.nativeElement;
+    audio.volume = 1; // Définit le volume à 100 %
 
-    audio.loop = true;
-    audio.volume = 1;
+    audio.addEventListener('play', () => { // Détecte le démarrage de la musique
+      this.musiqueEnLecture = true; // Affiche l'état lecture
+    }); // Termine l'écoute de play
 
-    audio.play()
-      .then(() => {
-        this.musiqueEnLecture = true;
-        this.autoplayTeste = true;
-        console.log('🎵 Musique lancée automatiquement.');
-      })
-      .catch((error) => {
-        this.autoplayTeste = true;
-        console.log('🔒 Autoplay bloqué par le navigateur.'+ error.message );
-      });
-  }
+    audio.addEventListener('pause', () => { // Détecte la mise en pause
+      this.musiqueEnLecture = false; // Affiche l'état pause
+    }); // Termine l'écoute de pause
 
-  // Gère le clic sur l'image
-  toggleMusique(): void {
-    const audio = this.audioPlayer.nativeElement;
+    setTimeout(() => { // Attend 300 millisecondes
+      this.lancerMusique(); // Essaie de lancer la musique
+    }, 300); // Définit le délai
+  } // Termine ngAfterViewInit
 
-    // Si la musique joue, on la met en pause
-    if (!audio.paused) {
-      audio.pause();
-      this.musiqueEnLecture = false;
-      console.log('⏸️ Musique en pause.');
-      return;
-    }
+  private lancerMusique(): void { // Essaie de lancer la musique
 
-    // Si la musique est en pause, on la relance
-    audio.play()
-      .then(() => {
-        this.musiqueEnLecture = true;
-        console.log('▶️ Musique relancée.');
-      })
-      .catch((error) => {
-        console.log('Impossible de lancer la musique :', error);
-      });
-  }
+    const audio = this.audioPlayer.nativeElement; // Récupère le lecteur audio
 
-  // Permet de démarrer la musique avec une interaction si l'autoplay est bloqué
-  @HostListener('document:pointerdown', ['$event'])
-  autoriserMusique(event: PointerEvent): void {
+    audio.play() // Lance la musique
+      .then(() => { // Si la lecture fonctionne
+        this.musiqueEnLecture = true; // Affiche l'icône pause
+      }) // Termine la réussite
+      .catch(() => { // Si le navigateur bloque l'autoplay
+        this.musiqueEnLecture = false; // Affiche l'icône lecture
+      }); // Termine la gestion de l'erreur
+  } // Termine lancerMusique
 
-    // Ignore le bouton fermer
-    const element = event.target as HTMLElement;
+  toggleMusique(): void { // Gère le clic sur l'image
 
-    if (element.closest('.btn-sortir')) {
-      return;
-    }
+    const audio = this.audioPlayer.nativeElement; // Récupère le lecteur audio
 
-    // Le clic sur l'image est déjà géré par toggleMusique()
-    if (element.closest('.image-principale')) {
-      return;
-    }
+    if (audio.paused) { // Vérifie si la musique est en pause
 
-    // Ne fait rien si la musique joue déjà
-    if (!this.audioPlayer || !this.audioPlayer.nativeElement.paused) {
-      return;
-    }
-  }
+      audio.play(); // Lance la musique
 
-  // Ferme l'application et revient à la page précédente
-  sortir(event: Event): void {
-    // Empêche le clic de remonter jusqu'à l'image
-    event.stopPropagation();
+    } else { // Sinon
 
-    const audio = this.audioPlayer.nativeElement;
+      audio.pause(); // Met la musique en pause
+    } // Termine la condition
+  } // Termine toggleMusique
 
-    // Arrête la musique
-    audio.pause();
-    // remet la musique au debut
-    audio.currentTime = 0;
+  pauseMusique(event: Event): void { // Gère le bouton pause ou lecture
 
-     // Détecte le navigateur
-    const navigateur = navigator.userAgent;
-    // Chrome
-  if (navigateur.includes('Chrome') && !navigateur.includes('Edg')) {
-    window.location.replace('https://www.google.com/');
-    return;
-  }
+    event.stopPropagation(); // Empêche le clic d'être transmis à l'image
 
-  // Edge
-  if (navigateur.includes('Edg')) {
-    window.location.replace('https://www.google.com/');
-    return;
-  }
+    const audio = this.audioPlayer.nativeElement; // Récupère le lecteur audio
 
-  // Firefox
-  if (navigateur.includes('Firefox')) {
-    window.location.replace('https://www.google.com/');
-    return;
-  }
-   // Opera
-  if (navigateur.includes('OPR')) {
-    window.location.replace('https://www.google.com/');
-    return;
-  }
+    if (audio.paused) { // Vérifie si la musique est en pause
 
-  // Safari
-  if (navigateur.includes('Safari')) {
-    window.location.replace('https://www.google.com/');
-    return;
-  }
+      audio.play(); // Relance la musique
 
-   // Opera
-  if (navigateur.includes('OPR')) {
-    window.location.replace('https://www.google.com/');
-    return;
-  }
+    } else { // Sinon
 
-  // Safari
-  if (navigateur.includes('Safari')) {
-    window.location.replace('https://www.google.com/');
-    return;
-  }
-
-  // Solution par défaut
-  window.location.replace('https://www.google.com/');
-  
-  }
-}
+      audio.pause(); // Met la musique en pause
+    } // Termine la condition
+  } // Termine pauseMusique
+} // Termine la classe

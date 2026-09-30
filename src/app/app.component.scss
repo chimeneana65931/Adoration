@@ -154,26 +154,30 @@
 
 }
 
-.btn-sortir {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+.btn-pause { // Définit le style du bouton pause
+  position: absolute; // Positionne le bouton par rapport au conteneur
+  top: 20px; // Place le bouton à 20 pixels du haut
+  right: 20px; // Place le bouton à 20 pixels de la droite
+  width: 45px; // Définit la largeur du bouton
+  height: 45px; // Définit la hauteur du bouton
+  border: none; // Supprime la bordure du bouton
+  border-radius: 50%; // Rend le bouton parfaitement circulaire
+  background: rgba(0, 0, 0, 0.5); // Ajoute un fond noir semi-transparent
+  color: white; // Définit la couleur du symbole
+  font-size: 21px; // Définit la taille du symbole
+  cursor: pointer; // Affiche le curseur en forme de main
+  z-index: 10; // Place le bouton au-dessus des autres éléments
+  display: flex; // Active Flexbox pour le contenu du bouton
+  align-items: center; // Centre verticalement le symbole
+  justify-content: center; // Centre horizontalement le symbole
+  transition: transform 0.2s ease, background 0.2s ease; // Ajoute une transition douce
+} // Ferme le style du bouton
 
-  width: 45px;
-  height: 45px;
+.btn-pause:hover { // Définit l'effet au survol du bouton
+  transform: scale(1.08); // Agrandit légèrement le bouton
+  background: rgba(0, 0, 0, 0.7); // Rend le fond plus foncé au survol
+} // Ferme le style du survol
 
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-
-  font-size: 22px;
-  cursor: pointer;
-
-  z-index: 10;
-}
-
-.cachee {
-  display: none;
-}
+.btn-pause:active { // Définit l'effet lors du clic
+  transform: scale(0.95); // Réduit légèrement le bouton pendant le clic
+} // Ferme le style du clic
