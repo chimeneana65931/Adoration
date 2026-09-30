@@ -1,183 +1,149 @@
-:host {
-  display: block;
-  width: 100%;
-  height: 100vh;
+:host { // Définit le style du composant
+  display: block; // Affiche le composant comme un bloc
+  width: 100%; // Prend toute la largeur disponible
+  height: 100vh; // Prend toute la hauteur de l'écran
 }
 
-.fullscreen {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-
-  background-color: #5b1648;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  overflow: hidden;
+.fullscreen { // Définit le conteneur principal
+  position: relative; // Permet de positionner le bouton par rapport au conteneur
+  width: 100%; // Prend toute la largeur
+  height: 100vh; // Prend toute la hauteur de l'écran
+  background-color: #5b1648; // Définit la couleur d'arrière-plan
+  display: flex; // Active Flexbox
+  justify-content: center; // Centre horizontalement le contenu
+  align-items: center; // Centre verticalement le contenu
+  overflow: hidden; // Empêche les éléments de dépasser de l'écran
 }
 
-.fullscreen img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  
-  display: block;
+.fullscreen img { // Définit l'image principale
+  width: 100%; // Donne toute la largeur à l'image
+  height: 100%; // Donne toute la hauteur à l'image
+  object-fit: contain; // Conserve les proportions de l'image
+  object-position: center; // Centre l'image
+  display: block; // Supprime les espaces autour de l'image
 }
 
-/* ZONE DES ÉTINCELLES : recentrée et dimensionnée sur l'ostensoir */
-.sparkles {
-  position: absolute;
-  //bottom: 70%;
-  top: 40%;
-  left: 50%;
-  right: 50%;
-  transform: translate(-50%, -50%);
-  
-  /* Ajustez cette taille (ex: 500px) pour qu'elle corresponde à la zone exacte de l'ostensoir */
-  width: 500px;
-  height: 500px;
-
-  pointer-events: none;
-  z-index: 5;
+.sparkles { // Définit la zone des étincelles
+  position: absolute; // Positionne les étincelles librement
+  top: 40%; // Positionne la zone verticalement
+  left: 50%; // Positionne la zone horizontalement
+  transform: translate(-50%, -50%); // Centre précisément la zone
+  width: 500px; // Définit la largeur de la zone
+  height: 500px; // Définit la hauteur de la zone
+  pointer-events: none; // Empêche les étincelles de bloquer les clics
+  z-index: 5; // Place les étincelles au-dessus de l'image
 }
 
-/* ÉTINCELLE (Votre style d'origine conservé à l'identique) */
-.sparkle {
-  position: absolute;
-
-  color: white;
-
-  font-size: 22px;
-
-  text-shadow:
-    0 0 5px white,
-    0 0 10px white,
-    0 0 20px #fff;
-
-  animation:
-    sparkleAnimation 2s infinite ease-in-out;
+.sparkle { // Définit le style des étincelles
+  position: absolute; // Permet de positionner chaque étincelle
+  color: white; // Définit la couleur blanche
+  font-size: 22px; // Définit la taille des étincelles
+  text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px #fff; // Ajoute un effet lumineux
+  animation: sparkleAnimation 2s infinite ease-in-out; // Anime les étincelles
 }
 
-/* POSITIONS (Resserrées pour entourer l'ostensoir au centre de la zone) */
-.sparkle-1 {
-  top: 15%;
-  left: 20%;
-  animation-delay: 0s;
-}
+.sparkle-1 { top: 15%; left: 20%; animation-delay: 0s; } // Positionne l'étincelle 1
+.sparkle-2 { top: 25%; left: 10%; animation-delay: 0.4s; } // Positionne l'étincelle 2
+.sparkle-3 { top: 35%; left: 22%; animation-delay: 0.8s; } // Positionne l'étincelle 3
+.sparkle-4 { top: 45%; left: 12%; animation-delay: 1.2s; } // Positionne l'étincelle 4
+.sparkle-5 { top: 55%; left: 20%; animation-delay: 1.6s; } // Positionne l'étincelle 5
+.sparkle-6 { top: 70%; left: 15%; animation-delay: 0.6s; } // Positionne l'étincelle 6
+.sparkle-7 { top: 18%; right: 20%; animation-delay: 1s; } // Positionne l'étincelle 7
+.sparkle-8 { top: 30%; right: 12%; animation-delay: 0.3s; } // Positionne l'étincelle 8
+.sparkle-9 { top: 42%; right: 20%; animation-delay: 1.4s; } // Positionne l'étincelle 9
+.sparkle-10 { top: 55%; right: 12%; animation-delay: 0.7s; } // Positionne l'étincelle 10
+.sparkle-11 { top: 68%; right: 18%; animation-delay: 1.8s; } // Positionne l'étincelle 11
+.sparkle-12 { top: 78%; right: 15%; animation-delay: 0.2s; } // Positionne l'étincelle 12
 
-.sparkle-2 {
-  top: 25%;
-  left: 10%;
-  animation-delay: 0.4s;
-}
-
-.sparkle-3 {
-  top: 35%;
-  left: 22%;
-  animation-delay: 0.8s;
-}
-
-.sparkle-4 {
-  top: 45%;
-  left: 12%;
-  animation-delay: 1.2s;
-}
-
-.sparkle-5 {
-  top: 55%;
-  left: 20%;
-  animation-delay: 1.6s;
-}
-
-.sparkle-6 {
-  top: 70%;
-  left: 15%;
-  animation-delay: 0.6s;
-}
-
-.sparkle-7 {
-  top: 18%;
-  right: 20%;
-  animation-delay: 1s;
-}
-
-.sparkle-8 {
-  top: 30%;
-  right: 12%;
-  animation-delay: 0.3s;
-}
-
-.sparkle-9 {
-  top: 42%;
-  right: 20%;
-  animation-delay: 1.4s;
-}
-
-.sparkle-10 {
-  top: 55%;
-  right: 12%;
-  animation-delay: 0.7s;
-}
-
-.sparkle-11 {
-  top: 68%;
-  right: 18%;
-  animation-delay: 1.8s;
-}
-
-.sparkle-12 {
-  top: 78%;
-  right: 15%;
-  animation-delay: 0.2s;
-}
-
-/* ANIMATION (Votre code d'origine inchangé) */
-@keyframes sparkleAnimation {
-
-  0% {
-    opacity: 0;
-    transform: scale(0.4) translateY(10px);
+@keyframes sparkleAnimation { // Définit l'animation des étincelles
+  0% { // Début de l'animation
+    opacity: 0; // Rend l'étincelle invisible
+    transform: scale(0.4) translateY(10px); // Réduit et déplace l'étincelle
   }
 
-  50% {
-    opacity: 1;
-    transform: scale(1.3) translateY(0);
+  50% { // Milieu de l'animation
+    opacity: 1; // Rend l'étincelle visible
+    transform: scale(1.3) translateY(0); // Agrandit l'étincelle
   }
 
-  100% {
-    opacity: 0;
-    transform: scale(0.4) translateY(-10px);
+  100% { // Fin de l'animation
+    opacity: 0; // Rend l'étincelle invisible
+    transform: scale(0.4) translateY(-10px); // Réduit et déplace l'étincelle
   }
-
 }
 
-.btn-pause { // Définit le style du bouton pause
-  position: absolute; // Positionne le bouton par rapport au conteneur
-  top: 20px; // Place le bouton à 20 pixels du haut
+/*.btn-pause { // Définit le bouton pause/lecture
+  position: absolute; // Positionne le bouton dans le conteneur
+  top: 10px; // Place le bouton à 20 pixels du haut
   right: 20px; // Place le bouton à 20 pixels de la droite
   width: 45px; // Définit la largeur du bouton
   height: 45px; // Définit la hauteur du bouton
-  border: none; // Supprime la bordure du bouton
-  border-radius: 50%; // Rend le bouton parfaitement circulaire
-  background: rgba(0, 0, 0, 0.5); // Ajoute un fond noir semi-transparent
-  color: white; // Définit la couleur du symbole
-  font-size: 21px; // Définit la taille du symbole
-  cursor: pointer; // Affiche le curseur en forme de main
-  z-index: 10; // Place le bouton au-dessus des autres éléments
-  display: flex; // Active Flexbox pour le contenu du bouton
-  align-items: center; // Centre verticalement le symbole
-  justify-content: center; // Centre horizontalement le symbole
+  padding: 0; // Supprime les marges internes par défaut
+  margin: 0; // Supprime les marges externes
+  border: 0; // Supprime la bordure
+  outline: none; // Supprime le contour du navigateur
+  border-radius: 50%; // Rend le bouton circulaire
+  background: rgba(0, 0, 0, 0.5); // Définit le fond noir transparent
+  color: #ffffff; // Définit la couleur blanche
+  font-family: Arial, sans-serif; // Définit une police stable
+  font-size: 21px; // Définit la taille de l'icône
+  font-weight: normal; // Évite une épaisseur automatique
+  line-height: 1; // Centre correctement l'icône
+  text-align: center; // Centre horizontalement l'icône
+  appearance: none; // Supprime l'apparence native du bouton
+  -webkit-appearance: none; // Supprime l'apparence native sur iPhone
+  -moz-appearance: none; // Supprime l'apparence native sur Firefox
+  cursor: pointer; // Affiche le curseur main sur ordinateur
+  z-index: 20; // Place le bouton au-dessus de tous les éléments
+  display: flex; // Active Flexbox
+  align-items: center; // Centre verticalement l'icône
+  justify-content: center; // Centre horizontalement l'icône
+  box-sizing: border-box; // Inclut les bordures dans les dimensions
   transition: transform 0.2s ease, background 0.2s ease; // Ajoute une transition douce
-} // Ferme le style du bouton
+}
 
-.btn-pause:hover { // Définit l'effet au survol du bouton
+.btn-pause:hover { // Définit l'effet au survol
   transform: scale(1.08); // Agrandit légèrement le bouton
-  background: rgba(0, 0, 0, 0.7); // Rend le fond plus foncé au survol
-} // Ferme le style du survol
+  background: rgba(0, 0, 0, 0.7); // Rend le fond plus sombre
+}
 
-.btn-pause:active { // Définit l'effet lors du clic
-  transform: scale(0.95); // Réduit légèrement le bouton pendant le clic
-} // Ferme le style du clic
+.btn-pause:active { // Définit l'effet pendant le clic
+  transform: scale(0.95); // Réduit légèrement le bouton
+}
+
+.btn-pause:focus { // Définit le comportement lorsque le bouton reçoit le focus
+  outline: none; // Supprime le contour automatique
+}
+
+.btn-pause:focus-visible { // Définit le comportement du focus visible
+  outline: 2px solid #ffffff; // Ajoute un contour blanc accessible
+  outline-offset: 2px; // Éloigne légèrement le contour du bouton
+}*/
+
+// Position et apparence du bouton
+.bu {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+
+  width: 45px;
+  height: 45px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  /*background: rgba(0, 0, 0, 0.5);*/
+  /*color: white;*/
+
+  font-size: 21px;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+

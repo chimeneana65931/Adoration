@@ -4,7 +4,7 @@
     class="image-principale"
     src="assets/icon/sacrements.jpg"
     alt="Image principale"
-    (click)="toggleMusique()"> <!-- Clique sur l'image pour lire ou mettre en pause -->
+  > 
 
   <div class="sparkles"> <!-- Conteneur des étincelles -->
     <span class="sparkle sparkle-1">✦</span> <!-- Étincelle 1 -->
@@ -27,18 +27,11 @@
     preload="auto"
     loop> <!-- Lecteur audio en boucle -->
   </audio>
+  
 
-  <button
-    class="btn-pause"
-    (click)="pauseMusique($event)"
-    [attr.aria-label]="musiqueEnLecture ? 'Mettre la musique en pause' : 'Lire la musique'"> <!-- Bouton de contrôle -->
-
-    @if (musiqueEnLecture) { <!-- Si la musique joue -->
-      ▶ <!-- Affiche l'icône pause -->
-    } @else { <!-- Si la musique est en pause -->
-      ⏸<!-- Affiche l'icône lecture -->
-    }
-
-  </button>
-
-</div>
+  @if(isPlaying()){
+    <button (click)="toggleMusique()" class="bu">⏸</button>
+  }@else{
+    <button (click)="toggleMusique()" class="bu">▶</button>
+  }
+ 
