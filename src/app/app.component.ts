@@ -39,9 +39,9 @@ export class AppComponent implements AfterViewInit {
         this.autoplayTeste = true;
         console.log('🎵 Musique lancée automatiquement.');
       })
-      .catch(() => {
+      .catch((error) => {
         this.autoplayTeste = true;
-        console.log('🔒 Autoplay bloqué par le navigateur.');
+        console.log('🔒 Autoplay bloqué par le navigateur.'+ error.message );
       });
   }
 
@@ -99,11 +99,54 @@ export class AppComponent implements AfterViewInit {
 
     // Arrête la musique
     audio.pause();
+    // remet la musique au debut
     audio.currentTime = 0;
 
-    this.musiqueEnLecture = false;
+     // Détecte le navigateur
+    const navigateur = navigator.userAgent;
+    // Chrome
+  if (navigateur.includes('Chrome') && !navigateur.includes('Edg')) {
+    window.location.replace('https://www.google.com/');
+    return;
+  }
 
-    // Revient à la page précédente du navigateur
-    window.history.back();
+  // Edge
+  if (navigateur.includes('Edg')) {
+    window.location.replace('https://www.google.com/');
+    return;
+  }
+
+  // Firefox
+  if (navigateur.includes('Firefox')) {
+    window.location.replace('https://www.google.com/');
+    return;
+  }
+   // Opera
+  if (navigateur.includes('OPR')) {
+    window.location.replace('https://www.google.com/');
+    return;
+  }
+
+  // Safari
+  if (navigateur.includes('Safari')) {
+    window.location.replace('https://www.google.com/');
+    return;
+  }
+
+   // Opera
+  if (navigateur.includes('OPR')) {
+    window.location.replace('https://www.google.com/');
+    return;
+  }
+
+  // Safari
+  if (navigateur.includes('Safari')) {
+    window.location.replace('https://www.google.com/');
+    return;
+  }
+
+  // Solution par défaut
+  window.location.replace('https://www.google.com/');
+  
   }
 }
